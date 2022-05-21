@@ -1,0 +1,10 @@
+.container {
+  display: grid;
+  place-items: center;
+  place-items: center;
+  height: 100vh;
+  padding-right: 15px;
+  padding-left: 15px;
+  background-color: #141A33;
+  color: #F6F6F7;
+}
