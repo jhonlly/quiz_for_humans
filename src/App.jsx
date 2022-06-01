@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Button, Container, Row } from './components';
+import { Container, Row, Title, When, Options, Button, Result } from './components';
 import { questions } from './data/questions';
 
 
@@ -7,8 +7,16 @@ function App() {
   const [currentQuestion, setCurrentQuestion] = React.useState({});
   const [questionIndex, setQuestionIndex] = React.useState(0);
   const [isDisabled, setIsDisabled] = React.useState(false);
+  const [isFinished, setIsFinished] = React.useState(false);
+  const [correctAnswers, setCorrectAnswers] = React.useState('');
+  const formRef = React.useRef();
 
-  const nextQuestion = () => {
+  const [results, setResults] = React.useState({
+    correct: 0,
+    incorrect: 0,
+  });
+
+  const nextQuestion = React.useCallback(() => {
     setQuestionIndex((prevState) => {
       if(prevState < questions.length -1 ) {
         return prevState + 1;
@@ -17,12 +25,30 @@ function App() {
     }
     );
     setIsDisabled(false);
-  };
+    setCorrectAnswers('');
+    formRef.current[0].value = '';
+  }, [setQuestionIndex, setIsDisabled, formRef]);
 
-  const checkAnswer = (isAnswer) => {
-    console.log({ test: isAnswer });
+  const checkAnswer = React.useCallback((event) => {
+    event.preventDefault();
+    const value = event.target[0].value;
+    const isCorrect = currentQuestion.answers.find((answer) => answer.answer === value && answer.correct);
+    if(isCorrect) {
+      setResults((prevState) => ({
+        ...prevState,
+        correct: isCorrect ? prevState.correct + 1 : prevState.correct,
+        incorrect: !isCorrect ? prevState.incorrect + 1 : prevState.incorrect,
+      }));
+    }{
+      const correct = currentQuestion.answers.find((answer) => answer.correct);
+      console.warn({ correct });
+      setCorrectAnswers(correct.answer);
+    }
+
     setIsDisabled(true);
-  };
+
+  }, [currentQuestion]);
+
 
   React.useEffect(() => {
     setCurrentQuestion(questions[questionIndex]);
@@ -30,45 +56,55 @@ function App() {
 
 
   return (
-    <Container>
-      <h1>Quiz for humans</h1>
-      <input type="range" min={0} max={questions?.length} step="1" value={questionIndex} readOnly/>
-      <Row>Question {questionIndex}/{questions.length}</Row>
-      <form>
-        <h2>{currentQuestion?.question}</h2>
-        {
-          currentQuestion?.answers?.map((answer,index) => (
-            <Row key={index}>
-              <Button
-                type="button"
-                name="answer"
-                onClick={() => checkAnswer(answer?.correct)}
-                disabled={isDisabled}
-                style={ isDisabled ? { color: answer?.correct  ? 'green' : 'red' } : {}}
-              >
-                {answer.answer}
-              </Button>
-            </Row>
-          ))
-        }
-
-      </form>
-      <Row>
-        <button
-          style={{
-            marginRight: '10px', padding: '10px 30px', borderRadius: '5px',
-            border:'none', backgroundColor: '#00bcd4', color: 'white',
-            fontSize: '1.2rem', fontWeight: 'bold', cursor: 'pointer'
-          }}
-          type='button'
-          onClick={nextQuestion}
-          disabled={!isDisabled}
-        >
-          Next
-        </button>
-      </Row>
-
-    </Container>
+    <>
+      <Title>Quiz for Humans</Title>
+      <Container>
+        <Row>Question {questionIndex +1 }/{questions.length}</Row>
+        {/*Extraer el formulario a un componente. */}
+        <form onSubmit={checkAnswer} ref={formRef}>
+          <h2>{currentQuestion?.question}</h2>
+          <When condition={currentQuestion?.type === 'options'}>
+            <>
+              <Options
+                answers={currentQuestion?.answers}
+                isDisabled={isDisabled}
+                required
+              />
+              <When condition={correctAnswers !== ''}>
+                <h2>
+                  {correctAnswers}
+                </h2>
+              </When>
+            </>
+          </When>
+          <When condition={currentQuestion?.type === 'text' }>
+            <input
+              type="text"
+              name={`answer-${questionIndex}`}
+              disabled={isDisabled}
+              required
+            />
+            <When condition={correctAnswers !== ''}>
+              <h2>
+                {correctAnswers}
+              </h2>
+            </When>
+          </When>
+          <Row>
+            <Button type='submit'disabled={isDisabled}>
+              Check
+            </Button>
+            <When condition={isDisabled}>
+              <Button onClick={nextQuestion}> Next </Button>
+            </When>
+          </Row>
+        </form>
+        <When condition={isFinished}>
+          <Result result={results} />
+        </When>
+        {JSON.stringify(results)}
+      </Container>
+    </>
   );
 }
 

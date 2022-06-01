@@ -1,6 +1,7 @@
 export const questions = [
   {
     question: 'What is the capital of France?',
+    type: 'options',
     answers: [
       { answer: 'Paris', correct: true },
       { answer: 'Lyon', correct: false },
@@ -10,6 +11,7 @@ export const questions = [
   },
   {
     question: 'What is the capital of Spain?',
+    type: 'text',
     answers: [
       { answer: 'Madrid',correct: true },
       { answer: 'Barcelona', correct: false },
@@ -19,6 +21,7 @@ export const questions = [
   },
   {
     question: 'What is the capital of Italy?',
+    type:'text',
     answers: [
       { answer: 'Rome', correct: true },
       { answer: 'Milan',correct: false },
@@ -28,15 +31,17 @@ export const questions = [
   },
   {
     question: 'What is the capital of Germany?',
+    type: 'options',
     answers: [
-      { answer: 'Berlin',correct: true },
       { answer: 'Hamburg', correct: false },
+      { answer: 'Berlin',correct: true },
       { answer: 'Munich', correct: false },
       { answer: 'Frankfurt', correct: false }
     ]
   },
   {
     question: 'How many continents are there?',
+    type: 'text',
     answers: [
       { answer: '7', correct: true },
       { answer: '8', correct: false },
@@ -46,6 +51,7 @@ export const questions = [
   },
   {
     question: 'Result of 4 + 2',
+    type: 'text',
     answers: [
       { answer: '6', correct: true },
       { answer: '7', correct: false },
@@ -55,6 +61,7 @@ export const questions = [
   },
   {
     question: 'Result of 4 - 2',
+    type: 'text',
     answers: [
       { answer: '2', correct: true },
       { answer: '3', correct: false },
@@ -63,16 +70,17 @@ export const questions = [
     ]
   },
   {
-    question: 'Result of 4 * 2',
+    question: 'Result of 4 * 8',
     answers: [
-      { answer: '8', correct: true },
       { answer: '9', correct: false },
       { answer: '10', correct: false },
-      { answer: '11', correct: false }
+      { answer: '11', correct: false },
+      { answer: '32', correct: true },
     ]
   },
   {
     question: 'Result of 4 / 2',
+    type: 'text',
     answers: [
       { answer: '2', correct: true },
       { answer: '3', correct: false },
@@ -82,6 +90,7 @@ export const questions = [
   },
   {
     question: 'Where is the country of Ludwig Beethoven?',
+    type: 'options',
     answers: [
       { answer: 'Austria', correct: true },
       { answer: 'Germany', correct: false },

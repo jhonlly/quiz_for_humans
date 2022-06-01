@@ -16,7 +16,7 @@ For doing this, LOM brings you a document with the specific requirements of the 
     For example:
     *   _"What is the current year?"_ with a number input.
     *   _"12 / 4 ="_ and a selector with options 4, 3, 5.
-    *   _"What is the surname of the leading creator of relativity theory called Albert?"_ with a text inputfor type Einstein
+    *   _"What is the surname of the leading creator of relativity theory called Albert?"_ with a text input for type Einstein
 *   The user will have only one chance to answer each question.
 *   There must be feedback for the user's answer, and if it's wrong, the program must display the correct answer.
 *   The program must track user progress to display the answered questions.
