@@ -1,18 +1,23 @@
 import * as React from 'react';
 import { Container, Row, Title, When, Result, Form } from './components';
-import { questions } from './data/questions';
+import { getQuestions } from './data/questions';
 
 function App() {
   const [currentQuestion, setCurrentQuestion] = React.useState({});
+  const [questions, setQuestions] = React.useState(getQuestions() || []);
   const [questionIndex, setQuestionIndex] = React.useState(0);
   const [isDisabled, setIsDisabled] = React.useState(false);
   const [correctAnswer, setCorrectAnswer] = React.useState('');
-  const formRef = React.useRef();
-
   const [results, setResults] = React.useState({
     correct: 0,
     incorrect: 0,
   });
+
+  const formRef = React.useRef();
+
+  React.useEffect(() => {
+    setCurrentQuestion(questions[questionIndex]);
+  }, [questionIndex]);
 
   const nextQuestion = React.useCallback(() => {
     setQuestionIndex((prevState) => prevState + 1);
@@ -21,9 +26,11 @@ function App() {
     formRef.current[0].value = '';
   }, [setQuestionIndex, setIsDisabled, formRef]);
 
+  const formatValue = React.useCallback((value) =>  value.toLowerCase().trim(), []);
+
   const checkAnswer = React.useCallback((event) => {
     event.preventDefault();
-    const value = event.target[0].value;
+    const value = formatValue(event.target[0].value);
     const isCorrect = currentQuestion.answers.find((answer) => answer.answer === value && answer.correct);
     setResults((prevState) => ({
       ...prevState,
@@ -46,11 +53,9 @@ function App() {
       correct: 0,
       incorrect: 0,
     });
+    setQuestions(getQuestions());
   }, [setQuestionIndex, setIsDisabled, setCorrectAnswer, setResults]);
 
-  React.useEffect(() => {
-    setCurrentQuestion(questions[questionIndex]);
-  }, [questionIndex]);
 
   const isFinished = React.useMemo(() => questionIndex > questions.length - 1, [questionIndex]);
 

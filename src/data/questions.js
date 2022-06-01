@@ -1,4 +1,4 @@
-export const questions = [
+const questions = [
   {
     question: 'What is the capital of France?',
     type: 'options',
@@ -101,3 +101,6 @@ export const questions = [
   },
 ];
 
+export const getQuestions = () => {
+  return questions.sort(() => Math.random() - 0.5);
+};
