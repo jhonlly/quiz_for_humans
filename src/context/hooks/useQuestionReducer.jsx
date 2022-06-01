@@ -40,6 +40,13 @@ export const useQuestionReducer = () => {
       payload: results,
     });
   }, []);
+
+  const nextQuestion = React.useCallback(() => {
+    dispatch({
+      type: Actions.NEXT_QUESTION,
+    });
+  }, []);
+
   const resetQuiz = React.useCallback(() => {
     dispatch({
       type: Actions.RESET_QUIZ,
@@ -54,6 +61,7 @@ export const useQuestionReducer = () => {
     setIsDisabled,
     setCorrectAnswer,
     setResults,
-    resetQuiz
+    resetQuiz,
+    nextQuestion,
   };
 };

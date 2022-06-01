@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useQuestionReducer } from '../hooks/useQuestionReducer';
+import { useQuestionReducer } from './hooks/useQuestionReducer';
 
 const QuestionsContext = React.createContext();
 

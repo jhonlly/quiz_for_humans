@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { Container, Row, Title, When, Result, Form } from '../../components';
-import { QuestionsProvider, useQuestions } from './context/questionsContext';
+import { QuestionsProvider, useQuestions } from '../../context/questionsContext';
 
 const Quiz = () => {
   const {
     state: { questions, results, currentQuestion, questionIndex, isDisabled, correctAnswer },
     setResults, resetQuiz, setCurrentQuestion,
-    setQuestionIndex, setIsDisabled, setCorrectAnswer  } = useQuestions();
+    setIsDisabled, setCorrectAnswer, nextQuestion  } = useQuestions();
 
   const formRef = React.useRef();
 
@@ -14,10 +14,8 @@ const Quiz = () => {
     setCurrentQuestion(questions[questionIndex]);
   }, [questionIndex]);
 
-  const nextQuestion = React.useCallback(() => {
-    setQuestionIndex(questionIndex + 1);
-    setIsDisabled(false);
-    setCorrectAnswer('');
+  const onNextQuestion = React.useCallback(() => {
+    nextQuestion();
     formRef.current[0].value = '';
   }, [questionIndex, setIsDisabled, formRef]);
 
@@ -56,7 +54,7 @@ const Quiz = () => {
             isDisabled={isDisabled}
             correctAnswer={correctAnswer}
             formRef={formRef}
-            nextQuestion={nextQuestion}
+            nextQuestion={onNextQuestion}
             checkAnswer={checkAnswer}
           />
         </When>

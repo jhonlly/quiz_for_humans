@@ -1,5 +1,5 @@
 import React from 'react';
-import When from '../../Conditionals/When';
+import { When } from '../../../../../components';
 
 const FeedBack = ({ text }) => {
   return (

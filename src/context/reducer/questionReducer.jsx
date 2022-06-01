@@ -1,4 +1,4 @@
-import { getQuestions } from '../../../data/questions';
+import { getQuestions } from '../../data/questions';
 
 const initialState = {
   questions: getQuestions(),
@@ -20,6 +20,7 @@ const Actions = {
   SET_CORRECT_ANSWER: 'SET_CORRECT_ANSWER',
   SET_RESULTS: 'SET_RESULTS',
   RESET_QUIZ: 'RESET_QUIZ',
+  NEXT_QUESTION: 'NEXT_QUESTION',
 };
 
 const reducer = (state, action) => {
@@ -57,6 +58,15 @@ const reducer = (state, action) => {
         ...action.payload
       },
     };
+
+  case Actions.NEXT_QUESTION:
+    return {
+      ...state,
+      questionIndex: state.questionIndex + 1,
+      isDisabled: false,
+      correctAnswer: '',
+    };
+
   case Actions.RESET_QUIZ:
     return initialState;
 

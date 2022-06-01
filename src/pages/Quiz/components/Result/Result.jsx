@@ -1,5 +1,5 @@
 import * as React from 'react';
-import When from '../Conditionals/When';
+import When from '../../../../components/Conditionals/When';
 import { Button } from '../Form';
 import * as Style from './Result.module.css';
 
