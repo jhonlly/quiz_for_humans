@@ -6,5 +6,4 @@ const When = ({ condition, children }) => {
   return null;
 };
 
-
 export default When;

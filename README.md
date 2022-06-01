@@ -32,5 +32,3 @@ You also can improve styles, usability, or performance as far as you want, but a
 To develop the program, you can fork this codepen, create a new one, or even create a new repo on any platform (GitHub, GitLab, etc.) and share it with us.
 
 The requirement here is to use frontend technologies, and the code must be visible and executable so that we can see the result.
-
-# [Quiz for humans](https://quizforhumans.netlify.app)
