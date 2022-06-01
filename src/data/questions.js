@@ -71,6 +71,7 @@ export const questions = [
   },
   {
     question: 'Result of 4 * 8',
+    type: 'text',
     answers: [
       { answer: '9', correct: false },
       { answer: '10', correct: false },

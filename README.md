@@ -12,7 +12,7 @@ It is up to you to please LOM to earn another chance for humanity. LOM only ask 
 For doing this, LOM brings you a document with the specific requirements of the program, which content is:
 
 *   The program must ask the user at least ten questions with only one correct answer.
-*   The questions can be of any kind: a calculation, choose one from multiple choices, text answer, or whatever. But always with a single correct answer.  
+*   The questions can be of any kind: a calculation, choose one from multiple choices, text answer, or whatever. But always with a single correct answer.
     For example:
     *   _"What is the current year?"_ with a number input.
     *   _"12 / 4 ="_ and a selector with options 4, 3, 5.

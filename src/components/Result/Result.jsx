@@ -1,14 +1,20 @@
 import * as React from 'react';
+import When from '../Conditionals/When';
 import { Button } from '../Form';
+import * as Style from './Result.module.css';
 
 const Result = ({ result, onClick }) => {
   return (
     <div>
-      <h2>{result.correct} correct answers</h2>
-      <h2>{result.incorrect} incorrect answers</h2>
-      <Button onClick={onClick}>
-            Try again
-      </Button>
+      <p className={Style.text}>{result.correct} correct answers</p>
+      <p className={Style.text}>{result.incorrect} incorrect answers</p>
+      <When condition={result.correct > result.incorrect}>
+        <p className={Style.text}>You are a human!😃 </p>
+      </When>
+      <When condition={result.correct < result.incorrect}>
+        <p className={Style.text}>You are a robot!🤖 </p>
+      </When>
+      <Button onClick={onClick}>Try again </Button>
     </div>
   );
 };

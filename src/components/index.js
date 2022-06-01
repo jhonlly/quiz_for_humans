@@ -4,6 +4,7 @@ import Title from './Title';
 import When from './Conditionals/When';
 import { Options, Button } from './Form';
 import  Result from './Result/Result';
+import Form from './Form/Form';
 
 export {
   Container,
@@ -12,5 +13,6 @@ export {
   When,
   Title,
   Options,
-  Result
+  Result,
+  Form,
 };
